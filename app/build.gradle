@@ -25,7 +25,10 @@ android {
     }
 
     buildTypes.each {
-        it.buildConfigField "String", "BASE_URL", "\"https://swapi.co/api/\""
+        it.buildConfigField "String", "BASE_URL", "\"http://gateway.marvel.com/v1/public/\""
+        it.buildConfigField "String", "API_KEY", "\"20e7d0885c365766979d8fb904bea8d6\""
+        it.buildConfigField "String", "PRIVATE_KEY", "\"6b42ae2acd7a0df2dda7f99f2abcdf60e0f7b887\""
+
     }
 
     androidExtensions {
