@@ -35,7 +35,7 @@ object DataModule {
         single { provideComicDao(get()) }
         single { provideApiService(get()) }
         single<DispatchersContainer> { AppDispatchersContainer() }
-        single<MarvelRepository> { MarvelRepositoryImpl(get(), get()) }
+        single<MarvelRepository> { MarvelRepositoryImpl(get(), get(), get()) }
         viewModel { MainViewModel(get(), get()) }
         factory<ComicListNavigation> { (fragment: Fragment) -> ComicListNavigationImpl(fragment.findNavController()) }
     }

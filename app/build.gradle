@@ -25,7 +25,7 @@ android {
     }
 
     buildTypes.each {
-        it.buildConfigField "String", "BASE_URL", "\"http://gateway.marvel.com/v1/public/\""
+        it.buildConfigField "String", "BASE_URL", "\"https://gateway.marvel.com/v1/public/\""
         it.buildConfigField "String", "API_KEY", "\"20e7d0885c365766979d8fb904bea8d6\""
         it.buildConfigField "String", "PRIVATE_KEY", "\"6b42ae2acd7a0df2dda7f99f2abcdf60e0f7b887\""
 
@@ -57,8 +57,10 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
 
     // Coroutines
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"

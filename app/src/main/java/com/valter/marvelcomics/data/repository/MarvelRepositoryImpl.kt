@@ -1,18 +1,34 @@
 package com.valter.marvelcomics.data.repository
 
+import android.content.Context
 import com.valter.marvelcomics.data.database.ComicDao
-import com.valter.marvelcomics.data.database.MarvelDatabase
 import com.valter.marvelcomics.data.database.entity.Comic
+import com.valter.marvelcomics.data.network.MarvelService
+import com.valter.marvelcomics.ui.main.ComicLoadData
+import com.valter.marvelcomics.utils.isConnectedToNetwork
 
 class MarvelRepositoryImpl(
         private val comicDao: ComicDao,
-        private val marvelDatabase: MarvelDatabase
+        private val marvelService: MarvelService,
+        context: Context
 ) : MarvelRepository {
-    override suspend fun getComic(searchQuery: String?, page: String, isFirstPage: Boolean): List<Comic> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+    private val appContext = context.applicationContext
+
+    override suspend fun getComics(page: Int) = if (appContext.isConnectedToNetwork()) {
+        fetchPeopleInfoFromNetwork(page)
+    } else {
+        fetchPeopleInfoFromDatabase()
     }
 
-    override suspend fun persistData(comics: List<Comic>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    private suspend fun fetchPeopleInfoFromNetwork(page: Int) = marvelService.fetchAllComics(page).data.results.toLoadData(page + 1).also {
+            persistData(it.comics)
+        }
+
+    private suspend fun fetchPeopleInfoFromDatabase() = comicDao.getAllComic().toLoadData(null)
+
+    override suspend fun persistData(comics: List<Comic>) = comicDao.insert(comics)
+
+    private fun List<Comic>.toLoadData(nextPage: Int?) = ComicLoadData(this, nextPage)
+
 }

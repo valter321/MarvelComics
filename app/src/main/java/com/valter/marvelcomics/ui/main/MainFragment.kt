@@ -1,30 +1,76 @@
 package com.valter.marvelcomics.ui.main
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowInsets
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import com.valter.marvelcomics.R
+import com.valter.marvelcomics.data.database.entity.Comic
+import com.valter.marvelcomics.data.model.ErrorData
+import com.valter.marvelcomics.ui.main.components.BaseFragment
+import com.valter.marvelcomics.utils.Outcome
+import com.valter.marvelcomics.utils.insideValue
+import kotlinx.android.synthetic.main.main_fragment.*
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
-class MainFragment : Fragment() {
+class MainFragment : BaseFragment() {
 
-    companion object {
-        fun newInstance() = MainFragment()
-    }
+    override val layout: Int
+        get() = R.layout.main_fragment
 
-    private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by viewModel { parametersOf(this) }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.main_fragment, container, false)
+    private val baseAdapter: ComicsAdapter by lazy { ComicsAdapter(::onComicClick) }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        rclItems.apply {
+            adapter = baseAdapter
+            layoutManager = GridLayoutManager(context, 3)
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        // TODO: Use the ViewModel
+        viewModel.comics.observe(viewLifecycleOwner, Observer {
+            baseAdapter.submitList(it)
+        })
+
+        viewModel.comicData.observe(viewLifecycleOwner, Observer { outcome ->
+            when (outcome) {
+                is Outcome.Progress -> showLoading()
+                is Outcome.Success -> showContent()
+                is Outcome.Failure -> showError(
+                        ErrorData(R.string.error_message,
+                                R.string.retry
+                        ),
+                        ::onRetryClicked
+                )
+            }
+        })
+    }
+
+    override fun onApplyWindowInsets(p0: View?, insets: WindowInsets): WindowInsets {
+        return insets
+    }
+
+    private fun onComicClick(comic: Comic) {
+
+    }
+
+    private fun onRetryClicked() {
+        viewModel.retry()
+    }
+
+    override fun onDestroyView() {
+        rclItems.adapter = null
+        super.onDestroyView()
     }
 
 }

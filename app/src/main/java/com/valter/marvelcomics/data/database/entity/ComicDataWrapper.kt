@@ -10,7 +10,7 @@ data class ComicDataWrapper(
         val attributionText: String,
         val code: String,
         val copyright: String,
-        val comicDataContainer: ComicDataContainer,
+        val data: ComicDataContainer,
         val etag: String,
         val status: String
 )

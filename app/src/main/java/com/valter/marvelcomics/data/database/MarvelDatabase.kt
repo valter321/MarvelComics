@@ -3,7 +3,7 @@ package com.valter.marvelcomics.data.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.valter.marvelcomics.data.converters.StringListTypeConverter
+import com.valter.marvelcomics.data.converters.*
 import com.valter.marvelcomics.data.database.entity.Comic
 
 @Database(
@@ -11,7 +11,11 @@ import com.valter.marvelcomics.data.database.entity.Comic
         version = 1
 )
 @TypeConverters(
-        StringListTypeConverter::class
+        ImageTypeConverter::class,
+        CreatorListTypeConverter::class,
+        ImageListTypeConverter::class,
+        CreatorSummaryListTypeConverter::class,
+        ComicSummaryListTypeConverter::class
 )
 abstract class MarvelDatabase : RoomDatabase() {
     abstract fun comicDao(): ComicDao
