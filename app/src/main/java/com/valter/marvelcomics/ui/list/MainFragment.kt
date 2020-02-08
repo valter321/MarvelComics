@@ -1,23 +1,21 @@
-package com.valter.marvelcomics.ui.main
+package com.valter.marvelcomics.ui.list
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.WindowInsets
 import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import com.valter.marvelcomics.R
 import com.valter.marvelcomics.data.database.entity.Comic
 import com.valter.marvelcomics.data.model.ErrorData
-import com.valter.marvelcomics.ui.main.components.BaseFragment
+import com.valter.marvelcomics.ui.components.BaseFragment
 import com.valter.marvelcomics.utils.Outcome
-import com.valter.marvelcomics.utils.insideValue
 import kotlinx.android.synthetic.main.main_fragment.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -31,6 +29,8 @@ class MainFragment : BaseFragment() {
         get() = R.layout.main_fragment
 
     private val viewModel: MainViewModel by viewModel { parametersOf(this) }
+
+    private val navigation: ComicListNavigation by inject { parametersOf(this) }
 
     private val baseAdapter: ComicsAdapter by lazy { ComicsAdapter(::onComicClick) }
 
@@ -50,6 +50,7 @@ class MainFragment : BaseFragment() {
         rclItems.apply {
             adapter = baseAdapter
             layoutManager = GridLayoutManager(context, COLUMN_NUMBER)
+            itemAnimator = DefaultItemAnimator()
         }
     }
 
@@ -77,8 +78,8 @@ class MainFragment : BaseFragment() {
         return insets
     }
 
-    private fun onComicClick(comic: Comic) {
-
+    private fun onComicClick(comicId: String) {
+        navigation.openComicDetails(comicId)
     }
 
     private fun onRetryClicked() {

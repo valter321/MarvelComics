@@ -60,7 +60,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
-    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    implementation "androidx.viewpager2:viewpager2:$viewPager2"
 
     // Coroutines
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
@@ -85,6 +85,9 @@ dependencies {
     // Koin
     implementation "org.koin:koin-android:$koinVersion"
     implementation "org.koin:koin-android-viewmodel:$koinVersion"
+
+    // Glide
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
 
     testImplementation "junit:junit:$junit4Version"
     testImplementation "androidx.arch.core:core-testing:$coreTesting"

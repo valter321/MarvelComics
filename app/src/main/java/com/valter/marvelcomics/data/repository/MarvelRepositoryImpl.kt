@@ -4,7 +4,7 @@ import android.content.Context
 import com.valter.marvelcomics.data.database.ComicDao
 import com.valter.marvelcomics.data.database.entity.Comic
 import com.valter.marvelcomics.data.network.MarvelService
-import com.valter.marvelcomics.ui.main.ComicLoadData
+import com.valter.marvelcomics.ui.list.ComicLoadData
 import com.valter.marvelcomics.utils.isConnectedToNetwork
 
 class MarvelRepositoryImpl(
@@ -37,4 +37,5 @@ class MarvelRepositoryImpl(
 
     private fun List<Comic>.toLoadData(nextPage: String?) = ComicLoadData(this, nextPage)
 
+    override suspend fun fetchComic(comicId: String) = marvelService.fetchComic(comicId.toInt()).data.results[0]
 }

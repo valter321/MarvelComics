@@ -12,9 +12,12 @@ import com.valter.marvelcomics.data.repository.MarvelRepository
 import com.valter.marvelcomics.data.repository.MarvelRepositoryImpl
 import com.valter.marvelcomics.dispatchers.AppDispatchersContainer
 import com.valter.marvelcomics.dispatchers.DispatchersContainer
-import com.valter.marvelcomics.ui.main.ComicListNavigation
-import com.valter.marvelcomics.ui.main.ComicListNavigationImpl
-import com.valter.marvelcomics.ui.main.MainViewModel
+import com.valter.marvelcomics.ui.details.ComicDetailsViewModel
+import com.valter.marvelcomics.ui.list.ComicListNavigation
+import com.valter.marvelcomics.ui.list.ComicListNavigationImpl
+import com.valter.marvelcomics.ui.list.MainViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
@@ -23,6 +26,8 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
+@ExperimentalCoroutinesApi
+@FlowPreview
 object DataModule {
     val module = module {
         single { provideMoshi() }
@@ -38,6 +43,7 @@ object DataModule {
         single<MarvelRepository> { MarvelRepositoryImpl(get(), get(), get()) }
         viewModel { MainViewModel(get(), get()) }
         factory<ComicListNavigation> { (fragment: Fragment) -> ComicListNavigationImpl(fragment.findNavController()) }
+        viewModel { (comicId: String) -> ComicDetailsViewModel(get(), get(), comicId) }
     }
 }
 

@@ -1,4 +1,4 @@
-package com.valter.marvelcomics.ui.main
+package com.valter.marvelcomics.ui.list
 
 import com.valter.marvelcomics.data.database.entity.Comic
 

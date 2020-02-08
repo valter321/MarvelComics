@@ -3,8 +3,8 @@ package com.valter.marvelcomics.utils
 import android.view.View
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
-import com.valter.marvelcomics.ui.main.components.SINGLE_LONG_CLICK_INTERVAL
-import com.valter.marvelcomics.ui.main.components.SingleClickListener
+import com.valter.marvelcomics.ui.components.SINGLE_LONG_CLICK_INTERVAL
+import com.valter.marvelcomics.ui.components.SingleClickListener
 
 fun View.hide() {
     this.visibility = View.GONE

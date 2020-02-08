@@ -1,4 +1,4 @@
-package com.valter.marvelcomics.ui.main
+package com.valter.marvelcomics.ui.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,12 +8,12 @@ import com.valter.marvelcomics.R
 import com.valter.marvelcomics.data.database.entity.Comic
 
 class ComicsAdapter(
-        private val onClickPerson: (comic: Comic) -> Unit
+        private val onClickComic: (comicId: String) -> Unit
 ) : PagedListAdapter<Comic, ComicsViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ComicsViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_comic_list, parent, false),
-            onClickPerson
+            onClickComic
     )
 
     override fun onBindViewHolder(holder: ComicsViewHolder, position: Int) {

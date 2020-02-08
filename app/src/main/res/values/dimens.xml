@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="elevation">3dp</dimen>
+    <dimen name="elevation">4dp</dimen>
 
     <dimen name="icon_image_size">50dp</dimen>
 
@@ -24,4 +24,15 @@
     <dimen name="small_start_margin">8dp</dimen>
     <dimen name="big_top_error_margin">110dp</dimen>
     <dimen name="medium_top_error_margin">70dp</dimen>
+
+    <!-- Material Design margins and paddings -->
+    <dimen name="md_margin_padding_half">4dp</dimen>
+    <dimen name="md_margin_padding_small">8dp</dimen>
+    <dimen name="md_margin_padding_medium">16dp</dimen>
+    <dimen name="md_margin_padding_large">24dp</dimen>
+    <dimen name="md_margin_padding_xlarge">32dp</dimen>
+    <dimen name="md_margin_padding_xxlarge">40dp</dimen>
+    <dimen name="md_margin_padding_xxxlarge">48dp</dimen>
+    <dimen name="md_margin_padding_huge">64dp</dimen>
+    <dimen name="md_margin_padding_xhuge">96dp</dimen>
 </resources>

@@ -1,4 +1,4 @@
-package com.valter.marvelcomics.ui.main.components
+package com.valter.marvelcomics.ui.components
 
 import android.os.SystemClock
 import android.view.View

@@ -1,4 +1,4 @@
-package com.valter.marvelcomics.ui.main
+package com.valter.marvelcomics.ui.list
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.item_comic_list.*
 
 class ComicsViewHolder(
         override val containerView: View,
-        private val personListener: (Comic) -> Unit
+        private val comicListener: (String) -> Unit
 ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
     fun bind(comic: Comic) {
         with(comic) {
@@ -23,7 +23,7 @@ class ComicsViewHolder(
 
             txtIssueNumber.text = containerView.context.getString(R.string.issue_number, issueNumber)
 
-            ctlContent.setSingleClickListener { personListener.invoke(this) }
+            ctlContent.setSingleClickListener { comicListener.invoke(id) }
 
         }
     }

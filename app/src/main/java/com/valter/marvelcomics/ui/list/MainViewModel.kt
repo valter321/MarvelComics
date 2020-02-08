@@ -1,4 +1,4 @@
-package com.valter.marvelcomics.ui.main
+package com.valter.marvelcomics.ui.list
 
 import androidx.lifecycle.*
 import androidx.paging.PageKeyedDataSource
@@ -6,8 +6,8 @@ import androidx.paging.toLiveData
 import com.valter.marvelcomics.data.database.entity.Comic
 import com.valter.marvelcomics.data.repository.MarvelRepository
 import com.valter.marvelcomics.dispatchers.DispatchersContainer
-import com.valter.marvelcomics.ui.main.components.MarvelDataSource
-import com.valter.marvelcomics.ui.main.components.MarvelDataSourceFactory
+import com.valter.marvelcomics.ui.components.MarvelDataSource
+import com.valter.marvelcomics.ui.components.MarvelDataSourceFactory
 import com.valter.marvelcomics.utils.Outcome
 import com.valter.marvelcomics.utils.launchSafely
 import kotlinx.coroutines.ExperimentalCoroutinesApi

@@ -4,4 +4,5 @@
     <string name="search_text">Search Comic</string>
     <string name="retry">RETRY</string>
     <string name="issue_number">#%s</string>
+    <string name="by_creator_list">by %s</string>
 </resources>

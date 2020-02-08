@@ -2,7 +2,6 @@ package com.valter.marvelcomics
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.valter.marvelcomics.ui.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
 

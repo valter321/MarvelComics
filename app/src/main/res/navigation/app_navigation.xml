@@ -3,13 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_navigation"
-    app:startDestination="@id/peopleListFragment">
+    app:startDestination="@id/comicListFragment">
 
     <fragment
-        android:id="@+id/peopleListFragment"
-        android:name="com.valter.marvelcomics.ui.main.MainFragment"
-        android:label="fragment_people_list"
+        android:id="@+id/comicListFragment"
+        android:name="com.valter.marvelcomics.ui.list.MainFragment"
+        android:label="fragment_comic_list"
         tools:layout="@layout/main_fragment">
+        <action
+            android:id="@+id/action_comicListFragment_to_ComicDetailsFragment"
+            app:destination="@id/comicDetailFragment"
+            app:enterAnim="@anim/slide_in_from_bottom"
+            app:exitAnim="@anim/stationary"
+            app:popExitAnim="@anim/slide_out_to_bottom"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/comicDetailFragment"
+        android:name="com.valter.marvelcomics.ui.details.ComicDetailsFragment"
+        android:label="fragment_comic_detail"
+        tools:layout="@layout/fragment_comic_details">
+        <argument
+            android:name="comicId"
+            app:argType="string" />
     </fragment>
 
 </navigation>
