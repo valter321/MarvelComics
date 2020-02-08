@@ -10,11 +10,25 @@ import com.valter.marvelcomics.ui.main.components.MarvelDataSource
 import com.valter.marvelcomics.ui.main.components.MarvelDataSourceFactory
 import com.valter.marvelcomics.utils.Outcome
 import com.valter.marvelcomics.utils.launchSafely
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.channels.ConflatedBroadcastChannel
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
+private const val QUERY_DEBOUNCE = 500L
+private const val START_PAGE = "0"
+
+@FlowPreview
+@ExperimentalCoroutinesApi
 class MainViewModel(
         private val repository: MarvelRepository,
         private val dispatchersContainer: DispatchersContainer
 ) : ViewModel() {
+
+    val queryChannel = ConflatedBroadcastChannel<String>()
 
     private val marvelDataSourceFactory = MarvelDataSourceFactory {
         MarvelDataSource(this::loadInitialPage, this::loadPage)
@@ -24,15 +38,21 @@ class MainViewModel(
     internal var comicData: LiveData<Outcome<ComicLoadData>> = _comicData
     internal var comics = marvelDataSourceFactory.toLiveData(1)
 
+    init {
+        queryChannel.asFlow()
+                .debounce(QUERY_DEBOUNCE)
+                .onEach { retry() }
+                .launchIn(viewModelScope)
+    }
+
     /**
      * Proxy to MarvelDataSource
      */
     private fun loadInitialPage(callback: PageKeyedDataSource.LoadInitialCallback<String, Comic>) {
         launchLoadRequest(
-                isFirstPage = true,
-                pageToLoad = 0
+                isFirstPage = true
         ) {
-            callback.onResult(it.comics, null, it.nextPage.toString())
+            callback.onResult(it.comics, null, it.nextPage)
         }
     }
 
@@ -44,15 +64,15 @@ class MainViewModel(
             pageToLoad: String
     ) {
         launchLoadRequest(
-                pageToLoad = pageToLoad.toInt()
+                pageToLoad = pageToLoad
         ) {
-            callback.onResult(it.comics, it.nextPage.toString())
+            callback.onResult(it.comics, it.nextPage)
         }
     }
 
     private fun launchLoadRequest(
+            pageToLoad: String = START_PAGE,
             isFirstPage: Boolean = false,
-            pageToLoad: Int,
             dataSourceCallbackCaller: (ComicLoadData) -> Unit
     ) {
         viewModelScope.launchSafely(
@@ -60,7 +80,7 @@ class MainViewModel(
                 loading = isFirstPage,
                 context = dispatchersContainer.IO
         ) {
-            repository.getComics(pageToLoad).also {
+            repository.getComics(queryChannel.valueOrNull.orEmpty(), pageToLoad).also {
                 dataSourceCallbackCaller(it)
             }
         }

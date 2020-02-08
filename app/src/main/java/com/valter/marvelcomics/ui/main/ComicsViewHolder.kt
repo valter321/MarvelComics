@@ -3,6 +3,7 @@ package com.valter.marvelcomics.ui.main
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.valter.marvelcomics.R
 import com.valter.marvelcomics.data.database.entity.Comic
 import com.valter.marvelcomics.utils.buildImageUrl
 import com.valter.marvelcomics.utils.setSingleClickListener
@@ -20,8 +21,7 @@ class ComicsViewHolder(
                     .centerCrop()
                     .into(imgComic)
 
-            txtName.text = title
-            txtIssueNumber.text = "#$issueNumber"
+            txtIssueNumber.text = containerView.context.getString(R.string.issue_number, issueNumber)
 
             ctlContent.setSingleClickListener { personListener.invoke(this) }
 

@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Marvel Comics</string>
     <string name="error_message">Something went wrong</string>
+    <string name="search_text">Search Comic</string>
     <string name="retry">RETRY</string>
+    <string name="issue_number">#%s</string>
 </resources>

@@ -15,20 +15,26 @@ class MarvelRepositoryImpl(
 
     private val appContext = context.applicationContext
 
-    override suspend fun getComics(page: Int) = if (appContext.isConnectedToNetwork()) {
-        fetchPeopleInfoFromNetwork(page)
+    override suspend fun getComics(searchQuery: String?, page: String) = if (searchQuery.isNullOrEmpty()) {
+        if (appContext.isConnectedToNetwork()) {
+            fetchComicsInfoFromNetwork(page.toInt())
+        } else {
+            fetchComicInfoFromDatabase()
+        }
     } else {
-        fetchPeopleInfoFromDatabase()
+        filterComics(searchQuery)
     }
 
-    private suspend fun fetchPeopleInfoFromNetwork(page: Int) = marvelService.fetchAllComics(page).data.results.toLoadData(page + 1).also {
+    private suspend fun fetchComicsInfoFromNetwork(page: Int) = marvelService.fetchAllComics(page).data.results.toLoadData((page + 1).toString()).also {
             persistData(it.comics)
         }
 
-    private suspend fun fetchPeopleInfoFromDatabase() = comicDao.getAllComic().toLoadData(null)
+    private suspend fun filterComics(searchQuery: String) = comicDao.getComic("$searchQuery%").toLoadData(null)
+
+    private suspend fun fetchComicInfoFromDatabase() = comicDao.getAllComic().toLoadData(null)
 
     override suspend fun persistData(comics: List<Comic>) = comicDao.insert(comics)
 
-    private fun List<Comic>.toLoadData(nextPage: Int?) = ComicLoadData(this, nextPage)
+    private fun List<Comic>.toLoadData(nextPage: String?) = ComicLoadData(this, nextPage)
 
 }

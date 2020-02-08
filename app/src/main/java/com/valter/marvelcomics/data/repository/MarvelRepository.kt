@@ -6,6 +6,6 @@ import com.valter.marvelcomics.utils.Outcome
 
 interface MarvelRepository {
 
-    suspend fun getComics(page: Int): ComicLoadData
+    suspend fun getComics(searchQuery: String? = null, page: String): ComicLoadData
     suspend fun persistData(comics: List<Comic>)
 }

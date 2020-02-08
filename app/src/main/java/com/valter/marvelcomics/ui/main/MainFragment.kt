@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsets
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -15,9 +16,15 @@ import com.valter.marvelcomics.ui.main.components.BaseFragment
 import com.valter.marvelcomics.utils.Outcome
 import com.valter.marvelcomics.utils.insideValue
 import kotlinx.android.synthetic.main.main_fragment.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
+private const val COLUMN_NUMBER = 3
+
+@FlowPreview
+@ExperimentalCoroutinesApi
 class MainFragment : BaseFragment() {
 
     override val layout: Int
@@ -27,12 +34,22 @@ class MainFragment : BaseFragment() {
 
     private val baseAdapter: ComicsAdapter by lazy { ComicsAdapter(::onComicClick) }
 
+    private var previousSearchedWord = ""
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Whenever the Search Edit Text changes a new query is sent to the viewModel
+        tieSearch.addTextChangedListener { newQuery ->
+            if(newQuery.toString() != previousSearchedWord) {
+                viewModel.queryChannel.offer(newQuery.toString())
+                previousSearchedWord = newQuery.toString()
+            }
+        }
+
         rclItems.apply {
             adapter = baseAdapter
-            layoutManager = GridLayoutManager(context, 3)
+            layoutManager = GridLayoutManager(context, COLUMN_NUMBER)
         }
     }
 
