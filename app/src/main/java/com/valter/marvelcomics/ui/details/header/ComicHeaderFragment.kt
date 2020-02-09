@@ -5,6 +5,7 @@ import android.view.View
 import android.view.WindowInsets
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.valter.marvelcomics.R
 import com.valter.marvelcomics.data.database.entity.Comic
 import com.valter.marvelcomics.ui.details.base.ComicDetailsBaseFragment
@@ -35,11 +36,12 @@ class ComicHeaderFragment : ComicDetailsBaseFragment() {
                 Glide.with(it)
                         .load(thumbnail.buildHighResImageUrl())
                         .centerCrop()
+                        .transition(DrawableTransitionOptions.withCrossFade())
                         .into(imgBackground)
             }
 
             txtName.text = title
-            val creatorList = creators.items.joinToString { "${it.name} (${it.role})" }
+            val creatorList = creators.items.joinToString { it.name }
             txtCreators.text = getString(R.string.by_creator_list, creatorList)
         }
     }
