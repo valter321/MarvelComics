@@ -1,7 +1,6 @@
 package com.valter.marvelcomics
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.valter.marvelcomics.data.database.ComicDao
 import com.valter.marvelcomics.data.database.entity.Comic
 import com.valter.marvelcomics.data.repository.MarvelRepository
 import com.valter.marvelcomics.dispatchers.TestDispatcherContainer
