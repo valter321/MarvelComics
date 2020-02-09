@@ -29,7 +29,7 @@ class MarvelRepositoryImpl(
             persistData(it.comics)
         }
 
-    private suspend fun filterComics(searchQuery: String) = comicDao.getComic("$searchQuery%").toLoadData(null)
+    private suspend fun filterComics(searchQuery: String) = comicDao.getComics("$searchQuery%").toLoadData(null)
 
     private suspend fun fetchComicInfoFromDatabase() = comicDao.getAllComic().toLoadData(null)
 

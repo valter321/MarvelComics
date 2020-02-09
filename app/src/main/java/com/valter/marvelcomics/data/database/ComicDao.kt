@@ -15,5 +15,5 @@ interface ComicDao {
     suspend fun getAllComic() : List<Comic>
 
     @Query("SELECT * FROM comic WHERE title LIKE :title")
-    suspend fun getComic(title: String) : List<Comic>
+    suspend fun getComics(title: String) : List<Comic>
 }

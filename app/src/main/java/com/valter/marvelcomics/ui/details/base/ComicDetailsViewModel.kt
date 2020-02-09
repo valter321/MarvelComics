@@ -38,7 +38,7 @@ class ComicDetailsViewModel(
     }
 
     /**
-     * Action to move to the next page in the PDP.
+     * Action to move to the next page in the Comic Details.
      */
     fun openNext() {
         _action.value = Outcome.success(ComicDetailAction.Next)
