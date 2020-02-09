@@ -15,7 +15,8 @@ import com.valter.marvelcomics.data.database.entity.Comic
         CreatorListTypeConverter::class,
         ImageListTypeConverter::class,
         CreatorSummaryListTypeConverter::class,
-        ComicSummaryListTypeConverter::class
+        ComicSummaryListTypeConverter::class,
+        SeriesSummaryTypeConverter::class
 )
 abstract class MarvelDatabase : RoomDatabase() {
     abstract fun comicDao(): ComicDao

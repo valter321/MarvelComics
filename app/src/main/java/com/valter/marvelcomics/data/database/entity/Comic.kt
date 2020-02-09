@@ -21,5 +21,6 @@ data class Comic(
         val thumbnail: ComicImage,
         val title: String,
         val variantDescription: String,
-        val variants: List<ComicSummary>?
+        val variants: List<ComicSummary>?,
+        val series: SeriesSummary
 )

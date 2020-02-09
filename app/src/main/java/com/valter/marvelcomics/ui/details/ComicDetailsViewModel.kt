@@ -16,6 +16,9 @@ class ComicDetailsViewModel(
         private val comicId: String
 ) : ViewModel() {
 
+    private val _action = MutableLiveData<Outcome<ComicDetailAction>>()
+    internal val action: LiveData<Outcome<ComicDetailAction>> = _action
+
     private val _selectedComic = MutableLiveData<Outcome<Comic>>()
     internal val selectedComic: LiveData<Outcome<Comic>> = _selectedComic
 
@@ -31,6 +34,13 @@ class ComicDetailsViewModel(
         ) {
             repository.fetchComic(comicId)
         }
+    }
+
+    /**
+     * Action to move to the next page in the PDP.
+     */
+    fun openNext() {
+        _action.value = Outcome.success(ComicDetailAction.Next)
     }
 
     fun retry() {

@@ -33,6 +33,15 @@ class ComicDetailsFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        viewModel.action.observe(viewLifecycleOwner, Observer { action ->
+            action?.let {
+                when (it) {
+                    is Outcome.Success -> vwpDetails.currentItem += 1
+                }
+            }
+        })
+
         viewModel.selectedComic.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Outcome.Progress -> showLoading()

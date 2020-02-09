@@ -6,4 +6,6 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="darkGradientBackground">#88000000</color>
+    <color name="lightGrey">#a0a0a0</color>
+    <color name="marvelRed">#ed1d24</color>
 </resources>

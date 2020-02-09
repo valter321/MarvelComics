@@ -18,6 +18,8 @@ class ComicHeaderFragment : ComicDetailsBaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        imgNext.setOnClickListener { viewModel.openNext() }
+
         viewModel.selectedComic.observe(viewLifecycleOwner, Observer { outcome ->
             when (outcome) {
                 is Outcome.Success -> setData(outcome.data)

@@ -5,4 +5,13 @@
     <string name="retry">RETRY</string>
     <string name="issue_number">#%s</string>
     <string name="by_creator_list">by %s</string>
+    <string name="details_title">Title: </string>
+    <string name="details_creators">Creators: </string>
+    <string name="details_issue_number">Issue Number: </string>
+    <string name="details_series_name">Series: </string>
+    <string name="details_description">Description </string>
+    <string name="details_skin_color">Skin Color: </string>
+    <string name="details_eye_color">Eye Color: </string>
+    <string name="details_birth_year">Birth Year: </string>
+    <string name="details_gender">Gender: </string>
 </resources>
