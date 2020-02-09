@@ -1,4 +1,4 @@
-package com.valter.marvelcomics.ui.details
+package com.valter.marvelcomics.ui.details.base
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelStoreOwner

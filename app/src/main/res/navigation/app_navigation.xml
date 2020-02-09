@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/comicDetailFragment"
-        android:name="com.valter.marvelcomics.ui.details.ComicDetailsFragment"
+        android:name="com.valter.marvelcomics.ui.details.base.ComicDetailsFragment"
         android:label="fragment_comic_detail"
         tools:layout="@layout/fragment_comic_details">
         <argument

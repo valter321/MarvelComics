@@ -12,7 +12,7 @@ import com.valter.marvelcomics.data.repository.MarvelRepository
 import com.valter.marvelcomics.data.repository.MarvelRepositoryImpl
 import com.valter.marvelcomics.dispatchers.AppDispatchersContainer
 import com.valter.marvelcomics.dispatchers.DispatchersContainer
-import com.valter.marvelcomics.ui.details.ComicDetailsViewModel
+import com.valter.marvelcomics.ui.details.base.ComicDetailsViewModel
 import com.valter.marvelcomics.ui.list.ComicListNavigation
 import com.valter.marvelcomics.ui.list.ComicListNavigationImpl
 import com.valter.marvelcomics.ui.list.MainViewModel

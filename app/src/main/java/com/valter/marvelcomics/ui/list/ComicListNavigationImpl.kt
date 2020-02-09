@@ -2,8 +2,7 @@ package com.valter.marvelcomics.ui.list
 
 import androidx.navigation.NavController
 import com.valter.marvelcomics.R
-import com.valter.marvelcomics.data.database.entity.Comic
-import com.valter.marvelcomics.ui.details.ComicDetailsFragmentArgs
+import com.valter.marvelcomics.ui.details.base.ComicDetailsFragmentArgs
 import com.valter.marvelcomics.utils.safeNavigate
 
 class ComicListNavigationImpl(

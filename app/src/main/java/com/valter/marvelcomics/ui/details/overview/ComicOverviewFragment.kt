@@ -1,4 +1,4 @@
-package com.valter.marvelcomics.ui.details
+package com.valter.marvelcomics.ui.details.overview
 
 import android.os.Bundle
 import android.view.View
@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import com.valter.marvelcomics.R
 import com.valter.marvelcomics.data.database.entity.Comic
 import com.valter.marvelcomics.data.model.Detail
+import com.valter.marvelcomics.ui.details.base.ComicDetailsBaseFragment
 import com.valter.marvelcomics.utils.Outcome
 import kotlinx.android.synthetic.main.fragment_comic_details_overview.*
 

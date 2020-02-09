@@ -1,4 +1,4 @@
-package com.valter.marvelcomics.ui.details
+package com.valter.marvelcomics.ui.details.overview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

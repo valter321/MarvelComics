@@ -1,4 +1,4 @@
-package com.valter.marvelcomics.ui.details
+package com.valter.marvelcomics.ui.details.base
 
 import android.os.Bundle
 import android.view.View

@@ -1,4 +1,4 @@
-package com.valter.marvelcomics.ui.details
+package com.valter.marvelcomics.ui.details.base
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.valter.marvelcomics.data.database.entity.Comic
 import com.valter.marvelcomics.data.repository.MarvelRepository
 import com.valter.marvelcomics.dispatchers.DispatchersContainer
+import com.valter.marvelcomics.ui.details.base.ComicDetailAction
 import com.valter.marvelcomics.utils.Outcome
 import com.valter.marvelcomics.utils.launchSafely
 

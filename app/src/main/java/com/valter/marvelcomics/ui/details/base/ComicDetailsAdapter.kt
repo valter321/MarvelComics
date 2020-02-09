@@ -1,8 +1,10 @@
-package com.valter.marvelcomics.ui.details
+package com.valter.marvelcomics.ui.details.base
 
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.valter.marvelcomics.ui.details.header.ComicHeaderFragment
+import com.valter.marvelcomics.ui.details.overview.ComicOverviewFragment
 
 private const val NUMBER_OF_PAGES = 2
 
