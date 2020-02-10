@@ -1,8 +1,12 @@
 package com.valter.marvelcomics.utils
 
 import android.view.View
+import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
+import com.valter.marvelcomics.R
 import com.valter.marvelcomics.ui.components.SINGLE_LONG_CLICK_INTERVAL
 import com.valter.marvelcomics.ui.components.SingleClickListener
 
@@ -13,16 +17,6 @@ fun View.hide() {
 fun View.show() {
     this.visibility = View.VISIBLE
 }
-
-fun View.invisible() {
-    this.visibility = View.INVISIBLE
-}
-
-fun View.setVisible(visible: Boolean) {
-    this.visibility = if (visible) View.VISIBLE else View.GONE
-}
-
-fun View.getColor(@ColorRes colorRes: Int) = ContextCompat.getColor(context, colorRes)
 
 /**
  *  Extension-function to prevent 'common double tap' issue
@@ -38,6 +32,27 @@ fun View.setSingleClickListener(
     setOnClickListener(singleClickListener)
 }
 
-fun String.getInitials() = this.split(' ')
-            .mapNotNull { it.firstOrNull()?.toString() }
-            .reduce { acc, s -> acc + s }
+/**
+ *  Hide Search Input when user scrolls down, and show it when the user scrolls up
+ */
+fun RecyclerView.addHideAndShowBehaviourTo(view: ViewGroup) {
+    var checkScrollingUp = false
+    addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+            if (dy > 0) { // Scrolling up
+                if (checkScrollingUp) {
+                    view.startAnimation(AnimationUtils.loadAnimation(context, R.anim.translation_upwards))
+                    checkScrollingUp = false
+                }
+            } else { // User scrolls down
+                if (!checkScrollingUp) {
+                    view
+                            .startAnimation(AnimationUtils
+                                    .loadAnimation(context, R.anim.translation_downwards))
+                    checkScrollingUp = true
+                }
+            }
+        }
+    })
+}
