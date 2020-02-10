@@ -21,8 +21,8 @@ class ComicsViewHolder(
                     .centerCrop()
                     .into(imgComic)
 
-            txtIssueNumber.text = containerView.context.getString(R.string.issue_number, issueNumber)
-
+//            txtIssueNumber.text = containerView.context.getString(R.string.issue_number, issueNumber)
+//            txtTitle.text = title
             ctlContent.setSingleClickListener { comicListener.invoke(id) }
 
         }

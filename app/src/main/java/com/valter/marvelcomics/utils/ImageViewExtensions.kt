@@ -2,7 +2,7 @@ package com.valter.marvelcomics.utils
 
 import com.valter.marvelcomics.data.database.entity.ComicImage
 
-const val IMAGE_VARIANT_NORMAL = "portrait_xlarge"
+const val IMAGE_VARIANT_NORMAL = "standard_xlarge"
 const val IMAGE_VARIANT_HIGH_RES = "detail"
 
 fun ComicImage.buildImageUrl() : String {

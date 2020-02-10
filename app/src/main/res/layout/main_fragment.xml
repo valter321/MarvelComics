@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
+    android:background="@color/white">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilSearch"
@@ -14,7 +14,7 @@
         android:layout_marginStart="@dimen/horizontal_padding"
         android:layout_marginTop="@dimen/recycler_view_start_margin"
         android:layout_marginEnd="@dimen/horizontal_padding"
-        android:background="@color/white"
+        android:background="@drawable/rounded_corners"
         android:elevation="@dimen/elevation"
         android:hint="@string/search_text"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +34,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
+        android:paddingStart="12dp"
         android:paddingTop="@dimen/top_padding"
+        android:paddingEnd="0dp"
         android:paddingBottom="@dimen/bottom_padding"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintStart_toStartOf="parent"

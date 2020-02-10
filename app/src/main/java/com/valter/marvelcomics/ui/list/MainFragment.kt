@@ -3,12 +3,13 @@ package com.valter.marvelcomics.ui.list
 import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
+import android.view.animation.AnimationUtils
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.valter.marvelcomics.R
-import com.valter.marvelcomics.data.database.entity.Comic
 import com.valter.marvelcomics.data.model.ErrorData
 import com.valter.marvelcomics.ui.components.BaseFragment
 import com.valter.marvelcomics.utils.Outcome
@@ -52,6 +53,27 @@ class MainFragment : BaseFragment() {
             layoutManager = GridLayoutManager(context, COLUMN_NUMBER)
             itemAnimator = DefaultItemAnimator()
         }
+
+        // Hide Search Input when user scrolls down, and show it when the user scrolls up
+        var checkScrollingUp = false
+        rclItems.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 0) { // Scrolling up
+                    if (checkScrollingUp) {
+                        tilSearch.startAnimation(AnimationUtils.loadAnimation(context, R.anim.translation_upwards))
+                        checkScrollingUp = false
+                    }
+                } else { // User scrolls down
+                    if (!checkScrollingUp) {
+                        tilSearch
+                                .startAnimation(AnimationUtils
+                                        .loadAnimation(context, R.anim.translation_downwards))
+                        checkScrollingUp = true
+                    }
+                }
+            }
+        })
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
