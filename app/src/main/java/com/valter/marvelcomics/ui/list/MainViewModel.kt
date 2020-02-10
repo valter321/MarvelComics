@@ -28,6 +28,9 @@ class MainViewModel(
         private val dispatchersContainer: DispatchersContainer
 ) : ViewModel() {
 
+    // Registers when the launches
+    var isFirstTime = true
+
     val queryChannel = ConflatedBroadcastChannel<String>()
 
     private val marvelDataSourceFactory = MarvelDataSourceFactory {

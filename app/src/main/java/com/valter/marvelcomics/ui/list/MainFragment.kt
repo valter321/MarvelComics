@@ -3,10 +3,13 @@ package com.valter.marvelcomics.ui.list
 import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
+import android.view.animation.AnimationUtils
+import android.view.animation.LayoutAnimationController
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.valter.marvelcomics.R
 import com.valter.marvelcomics.data.model.ErrorData
 import com.valter.marvelcomics.ui.components.BaseFragment
@@ -60,6 +63,8 @@ class MainFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel.comics.observe(viewLifecycleOwner, Observer {
             baseAdapter.submitList(it)
+            rclItems.runLayoutAnimation()
+            viewModel.isFirstTime = false
         })
 
         viewModel.comicData.observe(viewLifecycleOwner, Observer { outcome ->
@@ -91,6 +96,15 @@ class MainFragment : BaseFragment() {
     override fun onDestroyView() {
         rclItems.adapter = null
         super.onDestroyView()
+    }
+
+    private fun RecyclerView.runLayoutAnimation() {
+        if(viewModel.isFirstTime) {
+            val controller: LayoutAnimationController = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_slide_from_bottom)
+            layoutAnimation = controller
+            adapter!!.notifyDataSetChanged()
+            scheduleLayoutAnimation()
+        }
     }
 
 }
