@@ -28,7 +28,7 @@ class MainViewModel(
         private val dispatchersContainer: DispatchersContainer
 ) : ViewModel() {
 
-    // Registers when the launches
+    // Registers when the app starts
     var isFirstTime = true
 
     val queryChannel = ConflatedBroadcastChannel<String>()
