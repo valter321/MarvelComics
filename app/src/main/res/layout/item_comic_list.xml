@@ -6,14 +6,14 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingBottom="12dp">
+    android:paddingBottom="@dimen/vertical_padding">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cdvContent"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="@dimen/md_margin_padding_xxhuge"
+        android:layout_height="@dimen/md_margin_padding_xxhuge"
         android:orientation="vertical"
-        app:cardCornerRadius="8dp"
+        app:cardCornerRadius="@dimen/small_start_margin"
         app:cardElevation="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
