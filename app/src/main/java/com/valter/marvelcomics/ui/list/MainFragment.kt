@@ -104,6 +104,8 @@ class MainFragment : BaseFragment() {
             layoutAnimation = controller
             adapter!!.notifyDataSetChanged()
             scheduleLayoutAnimation()
+        } else {
+            layoutAnimation = null
         }
     }
 

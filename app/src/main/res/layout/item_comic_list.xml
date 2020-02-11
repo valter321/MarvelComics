@@ -25,6 +25,18 @@
             android:scaleType="centerCrop"
             tools:ignore="ContentDescription" />
 
+        <TextView
+            android:id="@+id/txtNotAvailable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:maxLines="4"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            tools:text="WDASDSADADSDASDdasdklsjadakldasdsdasdaddadadadadasdsa" />
+
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
